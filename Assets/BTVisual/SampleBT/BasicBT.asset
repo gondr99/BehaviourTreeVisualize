@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5945677223318414462
+--- !u!114 &-4281468594417417341
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,13 +9,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d51511581714b8095f11b31446a8a5c, type: 3}
-  m_Name: WaitNode
+  m_Script: {fileID: 11500000, guid: 59ff18e011eb4e1ba59c08354a7ff280, type: 3}
+  m_Name: SequenceNode
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: 9450f9e586fbb264f8f7656e693614e7
-  duration: 1
+  guid: 47ff5a16bdb2c3c43af164c024c9179a
+  position: {x: 309, y: 221.5}
+  children:
+  - {fileID: 4006699038146849085}
+  - {fileID: 6455027473851290017}
+--- !u!114 &-2186953848839410216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65a664222551774468e89422b7938f78, type: 3}
+  m_Name: RepeatNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 47e11991d301d4247bd2292cd821f999
+  position: {x: 127, y: 240}
+  child: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31,9 +51,28 @@ MonoBehaviour:
   rootNode: {fileID: 0}
   treeState: 0
   nodes:
-  - {fileID: 7085818970869650332}
-  - {fileID: -5945677223318414462}
---- !u!114 &7085818970869650332
+  - {fileID: 6455027473851290017}
+  - {fileID: 4006699038146849085}
+  - {fileID: -4281468594417417341}
+  - {fileID: -2186953848839410216}
+--- !u!114 &4006699038146849085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d51511581714b8095f11b31446a8a5c, type: 3}
+  m_Name: WaitNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 1ae2caa925956d84ba15242ab9a5b135
+  position: {x: 499, y: 183}
+  duration: 1
+--- !u!114 &6455027473851290017
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,5 +86,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   started: 0
-  guid: f2d3ad3da4073fa4ebf487524e33ee30
+  guid: a5470741a70ba8b419e58de50615d0d8
+  position: {x: 487, y: 260}
   message: 

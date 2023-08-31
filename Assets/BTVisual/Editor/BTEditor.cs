@@ -36,6 +36,8 @@ public class BTEditor : EditorWindow
 
         _treeView = root.Q<BehaviourTreeView>("TreeView"); //이름은 생략해도 동작한다.
         _inspectorView = root.Q<InspectorView>("Inspector"); 
+        
+        OnSelectionChange();
     }
 
     private void OnSelectionChange()

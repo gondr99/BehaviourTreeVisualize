@@ -14,7 +14,8 @@ namespace BTVisual
         public State state = State.RUNNING;
         public bool started = false;
         public string guid;
-
+        public Vector2 position;
+        
         public State Update()
         {
             if (!started)

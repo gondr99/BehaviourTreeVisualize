@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
@@ -12,6 +15,7 @@ namespace BTVisual
         public new class UxmlTraits : GraphView.UxmlTraits
         { }
 
+        public Action<NodeView> OnNodeSelected;
         private BehaviourTree _tree;
         
         public BehaviourTreeView()
@@ -36,6 +40,37 @@ namespace BTVisual
             
             //트리에 있는 모든 노드들을 노드뷰에 만들어준다.
             tree.nodes.ForEach(n => CreateNodeView(n));
+            
+            //트리에 있는 모든 엣지들을 만들어준다.
+            tree.nodes.ForEach(n =>
+            {
+                var children = tree.GetChildren(n);
+                NodeView parent = FindNodeView(n);
+                children.ForEach(c =>
+                {
+                    NodeView child = FindNodeView(c);
+
+                    //연결
+                    Edge edge = parent.output.ConnectTo(child.input);
+                    AddElement(edge);
+                });
+            });
+        }
+
+        private NodeView FindNodeView(Node node)
+        {
+            //Guid기반으로 그래프 뷰 상에 있는 노드뷰를 찾아온다.
+            return GetNodeByGuid(node.guid) as NodeView;
+        }
+
+        public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
+        {
+            //드래깅이 시작된 노드인 startPort와 맞물릴 수 있는 노드들의 리스트를 전부 가져온다.
+            // 같은 노드가 아니고 같은 입력입력 또는 아웃아웃이 아닌경우만 가져옴.
+            return ports.ToList().Where(endPort =>
+                endPort.direction != startPort.direction
+                && endPort.node != startPort.node
+            ).ToList();
         }
 
         /// <summary>
@@ -55,8 +90,28 @@ namespace BTVisual
                     {
                         _tree.DeleteNode(nv.node); //트리에서 해당 노드 삭제
                     }
+
+                    var edge = elem as Edge;
+                    if (edge != null)
+                    {
+                        NodeView parent = edge.output.node as NodeView; //나가는 쪽이 부모
+                        NodeView child = edge.input.node as NodeView; //입력되는 쪽이 자식
+                        _tree.RemoveChild(parent.node, child.node);
+                    }
                 });
             }
+
+            if (graphViewChange.edgesToCreate != null)
+            {
+                graphViewChange.edgesToCreate.ForEach(edge =>
+                {
+                    NodeView parent = edge.output.node as NodeView; //나가는 쪽이 부모
+                    NodeView child = edge.input.node as NodeView; //입력되는 쪽이 자식
+                    
+                    _tree.AddChild(parent.node, child.node);
+                });
+            }
+            
             return graphViewChange;
         }
 
@@ -67,6 +122,7 @@ namespace BTVisual
         private void CreateNodeView(Node node)
         {
             NodeView nodeView = new NodeView(node);
+            nodeView.OnNodeSelected = OnNodeSelected;
             AddElement(nodeView);
         }
 
