@@ -38,6 +38,14 @@ namespace BTVisual
             DeleteElements(graphElements);
             graphViewChanged += OnGraphViewChanged;
             
+            //트리에 루트노드가 없다면 만들어준다.
+            if (_tree.treeRoot == null)
+            {
+                tree.treeRoot = tree.CreateNode(typeof(RootNode)) as RootNode;
+                EditorUtility.SetDirty(tree);
+                AssetDatabase.SaveAssets();
+            }
+            
             //트리에 있는 모든 노드들을 노드뷰에 만들어준다.
             tree.nodes.ForEach(n => CreateNodeView(n));
             
@@ -122,12 +130,18 @@ namespace BTVisual
         private void CreateNodeView(Node node)
         {
             NodeView nodeView = new NodeView(node);
-            nodeView.OnNodeSelected = OnNodeSelected;
+            nodeView.OnNodeSelected = OnNodeSelected; //노드 선택시 이벤트 발동
             AddElement(nodeView);
         }
 
         public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
         {
+            if (_tree == null)
+            {
+                evt.StopPropagation();
+                return;
+            }
+            
             {
                 //ActionNode를 상속받은 모든 타입을 가져온다.
                 var types = TypeCache.GetTypesDerivedFrom<ActionNode>();

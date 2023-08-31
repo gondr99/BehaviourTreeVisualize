@@ -1,0 +1,72 @@
+#node-border {
+    background-color: rgb(65, 65, 65);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    border-left-color: rgb(31, 31, 31);
+    border-right-color: rgb(31, 31, 31);
+    border-top-color: rgb(31, 31, 31);
+    border-bottom-color: rgb(31, 31, 31);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding-top: 0;
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: 0;
+}
+
+#input {
+    align-items: center;
+}
+
+.port > #type {
+    position: absolute;
+}
+
+#output {
+    align-items: center;
+}
+
+#selection-border {
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-left-color: rgb(46, 97, 229);
+    border-right-color: rgb(46, 97, 229);
+    border-top-color: rgb(46, 97, 229);
+    border-bottom-color: rgb(46, 97, 229);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+:hover > #selection-border {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+:selected > #selection-border {
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+}
+
+:hover:selected > #selection-border {
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+}

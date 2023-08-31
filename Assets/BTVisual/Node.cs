@@ -11,10 +11,10 @@ namespace BTVisual
             SUCCESS
         }
 
-        public State state = State.RUNNING;
-        public bool started = false;
-        public string guid;
-        public Vector2 position;
+        [HideInInspector] public State state = State.RUNNING;
+        [HideInInspector] public bool started = false;
+        [HideInInspector] public string guid;
+        [HideInInspector] public Vector2 position;
         
         public State Update()
         {
@@ -35,6 +35,11 @@ namespace BTVisual
             return state;
         }
 
+        public virtual Node Clone()
+        {
+            return Instantiate(this);
+        }
+        
         protected abstract void OnStart();
         protected abstract void OnStop();
         protected abstract State OnUpdate();

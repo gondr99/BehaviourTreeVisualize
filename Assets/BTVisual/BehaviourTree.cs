@@ -8,16 +8,16 @@ namespace BTVisual
     [CreateAssetMenu(menuName = "BehviourTree/Tree")]
     public class BehaviourTree : ScriptableObject
     {
-        public Node rootNode;
+        public Node treeRoot;
         public Node.State treeState = Node.State.RUNNING;
         
         public List<Node> nodes = new List<Node>();
 
         public Node.State Update()
         {
-            if (rootNode.state == Node.State.RUNNING)
+            if (treeRoot.state == Node.State.RUNNING)
             {
-                treeState = rootNode.Update();
+                treeState = treeRoot.Update();
             }
             return treeState;
         }
@@ -59,6 +59,12 @@ namespace BTVisual
                 decorator.child = child;
                 return;
             }
+
+            var rootNode = parent as RootNode;
+            if (rootNode != null)
+            {
+                rootNode.child = child;
+            }
             
             var composite = parent as CompositeNode;
             if (composite != null) //콤포짓 노드라면
@@ -75,6 +81,13 @@ namespace BTVisual
             if (decorator != null) //데코레이터 노드라면
             {
                 decorator.child = null;
+                return;
+            }
+            
+            var rootNode = parent as RootNode;
+            if (rootNode != null)
+            {
+                rootNode.child = null;
                 return;
             }
             
@@ -96,12 +109,25 @@ namespace BTVisual
                 return composite.children;
             }
             
+            var rootNode = parent as RootNode;
+            if (rootNode != null && rootNode.child != null)
+            {
+                children.Add(rootNode.child);
+            }
+            
             var decorator = parent as DecoratorNode;
             if (decorator != null && decorator.child != null) //데코레이터 노드라면
             {
                 children.Add(decorator.child);
             }
             return children;
+        }
+        
+        public BehaviourTree Clone()
+        {
+            var tree = Instantiate(this);
+            tree.treeRoot = tree.treeRoot.Clone();
+            return tree;
         }
     }
 }

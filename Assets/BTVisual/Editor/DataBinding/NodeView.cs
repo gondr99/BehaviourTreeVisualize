@@ -11,7 +11,7 @@ namespace BTVisual
         public Port input;
         public Port output;
         public Action<NodeView> OnNodeSelected;
-        public NodeView(Node node)
+        public NodeView(Node node) : base("Assets/BTVisual/Editor/NodeView/NodeView.uxml")
         {
             this.node = node;
             this.title = node.name;
@@ -41,13 +41,16 @@ namespace BTVisual
             //각 노드별로 만들어지는 포트가 달라야한다. 
             if (node is ActionNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }else if (node is CompositeNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
             }else if (node is DecoratorNode)
             {
-                input = InstantiatePort(Orientation.Horizontal, Direction.Input, Port.Capacity.Single, typeof(bool));
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+            }else if (node is RootNode)
+            {
+                //No input
             }
 
             if (input != null)
@@ -65,10 +68,13 @@ namespace BTVisual
             }else if (node is CompositeNode)
             {
                 //컴포짓 노드는 여러개의 아웃풋을 가진다.
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
             }else if (node is DecoratorNode)
             {
-                output = InstantiatePort(Orientation.Horizontal, Direction.Output, Port.Capacity.Single, typeof(bool));
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+            }else if (node is RootNode)
+            {
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
             }
             
             if (output != null)
