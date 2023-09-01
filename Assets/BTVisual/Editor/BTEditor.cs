@@ -55,10 +55,12 @@ public class BTEditor : EditorWindow
         _blackboardView = root.Q<IMGUIContainer>("black-imgui");
         _blackboardView.onGUIHandler = () =>
         {
-            if (_treeObject == null) return;
-            _treeObject.Update();//갱신후에
-            EditorGUILayout.PropertyField(_blackboardProperty); //프로퍼티 그려준다.
-            _treeObject.ApplyModifiedProperties(); //갱신사항 적용
+            if (_treeObject != null && _treeObject.targetObject != null)
+            {
+                _treeObject.Update(); //갱신후에
+                EditorGUILayout.PropertyField(_blackboardProperty); //프로퍼티 그려준다.
+                _treeObject.ApplyModifiedProperties(); //갱신사항 적용
+            }
         };
         _treeView.OnNodeSelected += OnSelectionNodeChanged;
         OnSelectionChange();

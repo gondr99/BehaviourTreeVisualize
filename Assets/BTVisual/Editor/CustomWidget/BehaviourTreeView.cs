@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace BTVisual
@@ -159,13 +160,15 @@ namespace BTVisual
                 evt.StopPropagation();
                 return;
             }
+
+            Vector2 nodePostion = this.ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);
             
             {
                 //ActionNode를 상속받은 모든 타입을 가져온다.
                 var types = TypeCache.GetTypesDerivedFrom<ActionNode>();
                 foreach (var type in types)
                 {
-                    evt.menu.AppendAction($"[{type.BaseType.Name} {type.Name}] ", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name} ", (a) => CreateNode(type, nodePostion));
                 }    
             }
             
@@ -174,7 +177,7 @@ namespace BTVisual
                 var types = TypeCache.GetTypesDerivedFrom<CompositeNode>();
                 foreach (var type in types)
                 {
-                    evt.menu.AppendAction($"[{type.BaseType.Name} {type.Name}] ", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name} ", (a) => CreateNode(type, nodePostion));
                 }    
             }
             
@@ -183,15 +186,16 @@ namespace BTVisual
                 var types = TypeCache.GetTypesDerivedFrom<DecoratorNode>();
                 foreach (var type in types)
                 {
-                    evt.menu.AppendAction($"[{type.BaseType.Name} {type.Name}] ", (a) => CreateNode(type));
+                    evt.menu.AppendAction($"[{type.BaseType.Name}]/{type.Name} ", (a) => CreateNode(type, nodePostion));
                 }    
             }
         }
 
-        private void CreateNode(System.Type type)
+        private void CreateNode(System.Type type, Vector2 position)
         {
             //트리에다가 새로운 노드 만들고 그걸 뷰에다가도 만들어주고
             Node node = _tree.CreateNode(type);
+            node.position = position;
             CreateNodeView(node);
         }
         
