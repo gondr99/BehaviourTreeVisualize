@@ -12,10 +12,6 @@
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
-    padding-top: 0;
-    padding-right: 12px;
-    padding-left: 12px;
-    padding-bottom: 0;
 }
 
 #input {
@@ -23,7 +19,14 @@
 }
 
 .port > #type {
-    position: absolute;
+}
+
+.node {
+    min-width: 150px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
 }
 
 #output {
@@ -69,4 +72,65 @@
     border-right-width: 2px;
     border-bottom-width: 2px;
     border-left-width: 2px;
+}
+
+#title > #title-label {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    -unity-text-align: upper-center;
+    font-size: 17px;
+    -unity-font-style: bold;
+}
+
+#description {
+    padding-left: 5px;
+    padding-right: 5px;
+    white-space: normal;
+    max-width: 200px;
+}
+
+#divider {
+    min-height: 1px;
+    background-color: rgb(79, 79, 79);
+}
+
+.action #input {
+    background-color: rgb(60, 109, 217);
+}
+
+.root #input {
+    background-color: rgb(221, 5, 5);
+    height: 24px;
+}
+
+.decorator #input {
+    background-color: rgb(205, 207, 69);
+}
+
+.composite #input {
+    background-color: rgb(255, 173, 5);
+}
+
+#node-state {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.running #node-state {
+    background-color: rgb(255, 201, 13);
+}
+
+.success #node-sate {
+    background-color: rgb(45, 233, 14);
+}
+
+.failure #node-state {
+    background-color: rgb(245, 0, 0);
 }

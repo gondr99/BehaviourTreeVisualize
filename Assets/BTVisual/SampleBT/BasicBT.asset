@@ -15,7 +15,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 6c225a319156f4641926e43d0f47fa78
-  position: {x: 231, y: 487}
+  position: {x: 179, y: 483}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   duration: 2
 --- !u!114 &-4281468594417417341
 MonoBehaviour:
@@ -32,7 +36,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 47ff5a16bdb2c3c43af164c024c9179a
-  position: {x: 86, y: 308}
+  position: {x: 77, y: 311}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: "\uC2DC\uD000\uC2F1 \uB178\uB4DC \uC785\uB2C8\uB2E4.\n\uB2E4\uC74C\uC904\n\uB2E4\uC74C\uC904"
   children:
   - {fileID: 4006699038146849085}
   - {fileID: 6455027473851290017}
@@ -53,7 +61,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 47e11991d301d4247bd2292cd821f999
-  position: {x: 103, y: 175}
+  position: {x: 86, y: 166}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   child: {fileID: -4281468594417417341}
 --- !u!114 &11400000
 MonoBehaviour:
@@ -77,6 +89,9 @@ MonoBehaviour:
   - {fileID: 5589967994897521961}
   - {fileID: -6709442070650327646}
   - {fileID: 1702102959482773899}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
 --- !u!114 &1702102959482773899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +107,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: b04a08861bbe4a9409b3e4ead4227663
-  position: {x: 385, y: 457.5}
+  position: {x: 363, y: 483}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   message: "2\uCD08\uD6C4 \uBA54\uC2DC\uC9C0"
 --- !u!114 &4006699038146849085
 MonoBehaviour:
@@ -109,7 +128,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1ae2caa925956d84ba15242ab9a5b135
-  position: {x: -64, y: 496}
+  position: {x: -190, y: 483}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   duration: 1
 --- !u!114 &5589967994897521961
 MonoBehaviour:
@@ -126,7 +149,11 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: 1cf57d4ef6f014244aa1b046d8fede92
-  position: {x: 153, y: 1.2799988}
+  position: {x: 77, y: 26}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   child: {fileID: -2186953848839410216}
 --- !u!114 &6455027473851290017
 MonoBehaviour:
@@ -143,5 +170,9 @@ MonoBehaviour:
   state: 0
   started: 0
   guid: a5470741a70ba8b419e58de50615d0d8
-  position: {x: 86, y: 487}
+  position: {x: 2, y: 483}
+  blackboard:
+    moveToPosition: {x: 0, y: 0, z: 0}
+    moveToObject: {fileID: 0}
+  description: 
   message: "1\uCD08\uD6C4 \uBA54\uC2DC\uC9C0"

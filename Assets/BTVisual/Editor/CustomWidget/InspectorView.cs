@@ -24,7 +24,13 @@ public class InspectorView : VisualElement
         
         editor = Editor.CreateEditor(nodeView.node);
         //IMGUI컨테이너 안에 editor의 OnInspectorGUI를 실행한 결과를 띄운다.
-        IMGUIContainer container = new IMGUIContainer(() => editor.OnInspectorGUI());
+        IMGUIContainer container = new IMGUIContainer(() =>
+        {
+            if (editor.target)
+            {
+                editor.OnInspectorGUI();    
+            }
+        });
         
         Add(container); //이 비쥬얼 엘레멘트에 자식으로 넣는다.
     }

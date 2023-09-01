@@ -26,6 +26,14 @@ namespace BTVisual
             this.AddManipulator(new ContentDragger());
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
+
+            Undo.undoRedoPerformed += OnUndoRedoHandle;
+        }
+
+        private void OnUndoRedoHandle()
+        {
+            PopulateView(_tree);
+            AssetDatabase.SaveAssets(); //다시그리고 저장만(개무식하긴한데...아몰랑)
         }
 
         public void PopulateView(BehaviourTree tree)
@@ -119,6 +127,16 @@ namespace BTVisual
                     _tree.AddChild(parent.node, child.node);
                 });
             }
+
+            //이동된 엘레멘트가 있다면 
+            if (graphViewChange.movedElements != null)
+            {
+                nodes.ForEach(n =>
+                {
+                    var view = n as NodeView;
+                    view?.SortChildren();
+                });
+            }
             
             return graphViewChange;
         }
@@ -175,6 +193,15 @@ namespace BTVisual
             //트리에다가 새로운 노드 만들고 그걸 뷰에다가도 만들어주고
             Node node = _tree.CreateNode(type);
             CreateNodeView(node);
+        }
+        
+        public void UpdateNodeStates()
+        {
+            nodes.ForEach(n =>
+            {
+                var nodeView = n as NodeView;
+                nodeView?.UpdateState();
+            });
         }
     }    
 }
